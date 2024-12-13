@@ -17,6 +17,7 @@ export class TaskFormComponent implements OnInit {
   @Input() taskId: string | null = null; // For editing an existing task
   taskToEdit: Task | null = null;
   existingTags: Set<string> = new Set(); // To enforce unique tags
+  successMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -87,20 +88,26 @@ export class TaskFormComponent implements OnInit {
     this.taskForm.patchValue({ tags: Array.from(this.existingTags).join(', ') });
   }
 
-  onSubmit(): void {
-    if (this.taskForm.invalid) {
-      return;
-    }
+  onSubmit() {
+    if (this.taskForm.invalid) return;
 
-    const taskData: Task = {
+    const taskData = {
       ...this.taskForm.value,
-      tags: Array.from(this.existingTags),
+      tags: this.tagsArray
     };
 
-    if (this.taskToEdit && this.taskToEdit._id) {
-      this.taskService.updateTask(this.taskToEdit._id, taskData).subscribe();
-    } else {
-      this.taskService.createTask(taskData).subscribe();
-    }
+    this.taskService.createTask(taskData).subscribe({
+      next: () => {
+        this.successMessage = 'Task created successfully!';
+        setTimeout(() => (this.successMessage = null), 3000); // Hide the message after 3 seconds
+        this.taskForm.reset(); // Reset the form
+        this.existingTags.clear(); // Clear the tags set
+        this.taskForm.patchValue({ tags: '' }); // Clear the tags field in the form
+      },
+      error: (err) => {
+        console.error('Error creating task:', err);
+        alert('Failed to create task. Please try again.');
+      }
+    });
   }
 }

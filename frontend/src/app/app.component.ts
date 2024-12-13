@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TaskFormComponent, TaskListComponent, HttpClientModule],
+  imports: [TaskFormComponent, TaskListComponent, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,54 +1,68 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-  <!-- Title -->
-  <div class="mb-3">
-    <label for="title" class="form-label">Title</label>
-    <input id="title" formControlName="title" class="form-control" />
-    <div *ngIf="taskForm.controls['title'].invalid && taskForm.controls['title'].touched" class="text-danger">
-      Title is required and must be at least 3 characters.
+<div class="container mt-4">
+  <h2>{{ taskToEdit ? 'Edit Task' : 'Create Task' }}</h2>
+
+  <!-- Success message -->
+  <div *ngIf="successMessage" class="alert alert-success" role="alert">
+    {{ successMessage }}
+  </div>
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <!-- Title -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input id="title" formControlName="title" class="form-control" />
+      <div *ngIf="taskForm.controls['title'].invalid && taskForm.controls['title'].touched" class="text-danger">
+        Title is required and must be at least 3 characters.
+      </div>
     </div>
-  </div>
 
-  <div class="mb-3">
-    <label for="dueDate" class="form-label">Due Date</label>
-    <input id="dueDate" formControlName="dueDate" type="date" class="form-control" />
-    <div *ngIf="taskForm.controls['dueDate'].invalid && taskForm.controls['dueDate'].touched" class="text-danger">
-      Due Date cannot be a past date.
+    <!-- Due Date -->
+    <div class="mb-3">
+      <label for="dueDate" class="form-label">Due Date</label>
+      <input id="dueDate" formControlName="dueDate" type="date" class="form-control" />
+      <div *ngIf="taskForm.controls['dueDate'].invalid && taskForm.controls['dueDate'].touched" class="text-danger">
+        Due Date cannot be a past date.
+      </div>
     </div>
-  </div>
 
-  <div class="mb-3">
-    <label for="status" class="form-label">Status</label>
-    <select id="status" formControlName="status" class="form-select">
-      <option value="Pending">Pending</option>
-      <option value="In Progress">In Progress</option>
-      <option value="Completed">Completed</option>
-    </select>
-  </div>
-
-  <div class="mb-3">
-    <label for="priority" class="form-label">Priority</label>
-    <select id="priority" formControlName="priority" class="form-select">
-      <option value="Low">Low</option>
-      <option value="Medium">Medium</option>
-      <option value="High">High</option>
-    </select>
-  </div>
-
-  <div class="mb-3">
-    <label for="tags" class="form-label">Tags</label>
-    <div class="d-flex">
-      <input #tagsInput id="tags" formControlName="tags" class="form-control" [value]="taskForm.value.tags"
-        (keyup.enter)="addTag(tagsInput?.value ?? '')" />
-      <button type="button" class="btn btn-primary" (click)="addTag(tagsInput.value)">Add Tag</button>
+    <!-- Status -->
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select id="status" formControlName="status" class="form-select">
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+      </select>
     </div>
-    <div>
-      <span *ngFor="let tag of tagsArray" class="badge bg-primary me-1">{{ tag }}
-        <button type="button" class="btn-close" (click)="removeTag(tag)"></button>
-      </span>
-    </div>
-  </div>
 
-  <button type="submit" class="btn btn-success" [disabled]="taskForm.invalid">
-    {{ taskToEdit ? 'Update' : 'Create' }} Task
-  </button>
-</form>
+    <!-- Priority -->
+    <div class="mb-3">
+      <label for="priority" class="form-label">Priority</label>
+      <select id="priority" formControlName="priority" class="form-select">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+    </div>
+
+    <!-- Tags -->
+    <div class="mb-3">
+      <label for="tags" class="form-label">Tags</label>
+      <div class="d-flex">
+        <input #tagsInput id="tags" class="form-control" (keyup.enter)="addTag(tagsInput?.value ?? '')" />
+        <button type="button" class="btn btn-primary ms-2" (click)="addTag(tagsInput.value)">Add Tag</button>
+      </div>
+      <div class="mt-2">
+        <span *ngFor="let tag of tagsArray" class="badge bg-primary me-1">
+          {{ tag }}
+          <button type="button" class="btn-close" (click)="removeTag(tag)"></button>
+        </span>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-success" [disabled]="taskForm.invalid">
+      {{ taskToEdit ? 'Update' : 'Create' }} Task
+    </button>
+  </form>
+</div>
