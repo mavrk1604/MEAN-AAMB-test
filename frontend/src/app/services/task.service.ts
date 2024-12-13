@@ -23,8 +23,12 @@ export class TaskService {
     return this.http.post<Task>(`${this.apiUrl}/create-task`, task); // Calls /api/create-task
   }
 
-  updateTask(id: string, task: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.apiUrl}/update-task/${id}`, task); // Calls /api/update-task/:id
+  updateTask(id: string, task: Partial<Task>): Observable<any> {
+    return this.http.put(`${this.apiUrl}/update-task/${id}`, task);  // Added apiUrl
+  }
+
+  deleteTask(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete-task/${id}`); // Calls /api/delete-task/:id
   }
 
 }
