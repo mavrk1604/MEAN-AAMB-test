@@ -46,7 +46,7 @@
           <span *ngFor="let tag of task.tags" class="badge bg-primary me-1">{{ tag }}</span>
         </td>
         <td>
-          <button class="btn btn-warning btn-sm me-1" (click)="openEditModal(task)">Edit</button>
+          <button class="btn btn-success btn-sm me-1" (click)="openEditModal(task)">View/Edit</button>
           <button class="btn btn-danger btn-sm" (click)="task._id ? deleteTask(task._id) : null">Delete</button>
         </td>
       </tr>
@@ -67,6 +67,10 @@
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <input id="title" formControlName="title" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea id="description" formControlName="description" class="form-control" rows="4"></textarea>
             </div>
             <div class="mb-3">
               <label for="dueDate" class="form-label">Due Date</label>

@@ -32,6 +32,7 @@ export class TaskListComponent implements OnInit {
   constructor(private taskService: TaskService, private fb: FormBuilder) {
     this.editTaskForm = this.fb.group({
       title: [''],
+      description: [''],
       dueDate: [''],
       status: [''],
       priority: [''],
@@ -76,6 +77,7 @@ export class TaskListComponent implements OnInit {
     this.currentTaskId = task._id || '';
     this.editTaskForm.patchValue({
       title: task.title,
+      description: task.description,
       dueDate: task.dueDate,
       status: task.status,
       priority: task.priority,
@@ -109,10 +111,19 @@ export class TaskListComponent implements OnInit {
       });
   }
 
+
   deleteTask(id: string): void {
-    this.taskService.deleteTask(id).subscribe({
-      next: () => this.loadTasks(),
-      error: (error: any) => console.error('Error deleting task:', error)
-    });
+    const confirmation = window.confirm('Are you sure you want to delete this task?');
+
+    if (confirmation) {
+      this.taskService.deleteTask(id).subscribe({
+        next: () => {
+          // Show confirmation message to the user
+          alert('Task has been deleted successfully!');
+          this.loadTasks();  // Reload tasks after deletion
+        },
+        error: (error: any) => console.error('Error deleting task:', error)
+      });
+    }
   }
 }
