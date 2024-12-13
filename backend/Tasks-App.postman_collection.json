@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "75901be8-256e-4afb-8b13-9e91a3161728",
+		"name": "Tasks App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36825761"
+	},
+	"item": [
+		{
+			"name": "createTask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Clean Room\",\r\n    \"description\": \"Make bed and Dust\",\r\n    \"status\": \"Pending\",\r\n    \"priority\": \"Medium\",\r\n    \"dueDate\":\"2024-06-19T00:00:00.000Z\",\r\n    \"tags\": [\"Finance\", \"Reporting\", \"Monthly Task\"],\r\n    \"history\": [\r\n        {\r\n            \"updatedAt\": \"2024-01-25T10:30:00.000Z\",\r\n            \"changes\": {\r\n                \"initialCreation\": \"Task assigned to finance team\",\r\n                \"initialPriority\": \"Set to high importance\"\r\n            }\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/create-task",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"create-task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/get-tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"get-tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTasks=status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/get-tasks?status=Completed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"get-tasks"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "Completed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTasks=tags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/get-tasks?tags=finance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"get-tasks"
+					],
+					"query": [
+						{
+							"key": "tags",
+							"value": "finance"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTasks=dueDate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/get-tasks?tags=finance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"get-tasks"
+					],
+					"query": [
+						{
+							"key": "tags",
+							"value": "finance"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTaskById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/get-task-by-id/675b940b37d6e06be6362188",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"get-task-by-id",
+						"675b940b37d6e06be6362188"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateTaskByID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Do the dishes\",\r\n    \"description\": \"Make bed and Dust\",\r\n    \"status\": \"In Progress\",\r\n    \"priority\": \"Medium\",\r\n    \"dueDate\":\"2024-06-19T00:00:00.000Z\",\r\n    \"tags\": [\"Finance\", \"Reporting\", \"Monthly Task\"],\r\n    \"history\": [\r\n        {\r\n            \"updatedAt\": \"2024-01-25T10:30:00.000Z\",\r\n            \"changes\": {\r\n                \"initialCreation\": \"Task assigned to finance team\",\r\n                \"initialPriority\": \"Set to high importance\"\r\n            }\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/update-task/675b9d47990ad791be3730bf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"update-task",
+						"675b9d47990ad791be3730bf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteTaskByID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/delete-task/675b9a6cf1a1306f6eac52e7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"delete-task",
+						"675b9a6cf1a1306f6eac52e7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

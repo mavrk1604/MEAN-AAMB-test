@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <h2>Task List</h2>
+
+  <div class="mb-3">
+    <input type="text" class="form-control" placeholder="Search by title..." [(ngModel)]="searchTerm"
+      (input)="filterTasks()" />
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <select class="form-select" [(ngModel)]="selectedStatus" (change)="filterTasks()">
+        <option value="">Filter by Status</option>
+        <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <select class="form-select" [(ngModel)]="selectedPriority" (change)="filterTasks()">
+        <option value="">Filter by Priority</option>
+        <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <input type="text" class="form-control" placeholder="Filter by Tags (comma-separated)" [(ngModel)]="tagFilter"
+        (input)="filterTasks()" />
+    </div>
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Due Date</th>
+        <th>Tags</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of filteredTasks">
+        <td>{{ task.title }}</td>
+        <td>{{ task.status }}</td>
+        <td>{{ task.priority }}</td>
+        <td>{{ task.dueDate | date: 'shortDate' }}</td>
+        <td>
+          <span *ngFor="let tag of task.tags" class="badge bg-primary me-1">{{ tag }}</span>
+        </td>
+        <td>
+          <button class="btn btn-warning btn-sm me-1">Edit</button>
+          <button class="btn btn-danger btn-sm">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
