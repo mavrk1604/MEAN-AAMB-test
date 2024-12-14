@@ -35,7 +35,7 @@ A task management application built using the MEAN stack.
    ```bash
    npm run start
    ```
-   The backend server will run on `http://localhost:5000` by default.
+   The backend server will run on `http://localhost:5000`.
 
 ### **Frontend Setup**:
 1. Navigate to the `frontend` folder:
@@ -68,8 +68,5 @@ A task management application built using the MEAN stack.
      - **Priority**
      - **Tags**
 
-## **Deployment Notes**:
-- Ensure the backend server is accessible to the frontend for CRUD operations with MongoDB.
-
-## **Additional Notes**:
+## **Note**:
 - A postman collection has been added to the root directory of the repository, the collection includes pre-configured requests for testing all CRUD endpoints.
