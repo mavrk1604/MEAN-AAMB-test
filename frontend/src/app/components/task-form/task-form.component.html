@@ -1,10 +1,7 @@
 <div class="container mt-4">
   <h2>{{ taskToEdit ? 'Edit Task' : 'Create Task' }}</h2>
 
-  <!-- Success message -->
-  <div *ngIf="successMessage" class="alert alert-success" role="alert">
-    {{ successMessage }}
-  </div>
+
 
   <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
     <!-- Title -->
@@ -13,6 +10,16 @@
       <input id="title" formControlName="title" class="form-control" />
       <div *ngIf="taskForm.controls['title'].invalid && taskForm.controls['title'].touched" class="text-danger">
         Title is required and must be at least 3 characters.
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" formControlName="description" class="form-control" rows="3"></textarea>
+      <div *ngIf="taskForm.controls['description'].invalid && taskForm.controls['description'].touched"
+        class="text-danger">
+        Description cannot exceed 500 characters.
       </div>
     </div>
 
@@ -60,6 +67,11 @@
       </div>
     </div>
 
+  <!-- Success message -->
+  <div *ngIf="successMessage" class="alert alert-success" role="alert">
+    {{ successMessage }}
+  </div>
+  
     <!-- Submit Button -->
     <button type="submit" class="btn btn-success" [disabled]="taskForm.invalid">
       {{ taskToEdit ? 'Update' : 'Create' }} Task

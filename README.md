@@ -4,7 +4,7 @@
 A task management application built using the MEAN stack.
 
 ## **Technologies Used**:
-- **Frontend**: Angular 19
+- **Frontend**: Angular 19, Bootstrap
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 

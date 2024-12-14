@@ -26,6 +26,7 @@ export class TaskFormComponent implements OnInit {
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', [Validators.maxLength(500)]],
       dueDate: ['', [Validators.required, this.dateValidator]],
       status: ['Pending', Validators.required],
       priority: ['Low', Validators.required],
@@ -36,6 +37,7 @@ export class TaskFormComponent implements OnInit {
   ngOnInit(): void {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', [Validators.maxLength(500)]],
       dueDate: ['', [Validators.required, this.dateValidator]],
       status: ['Pending', Validators.required],
       priority: ['Low', Validators.required],
@@ -55,6 +57,7 @@ export class TaskFormComponent implements OnInit {
       this.taskToEdit = task;
       this.taskForm.patchValue({
         title: task.title,
+        description: task.description || '',
         dueDate: task.dueDate,
         status: task.status,
         priority: task.priority
