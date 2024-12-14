@@ -6,10 +6,9 @@ import { Task } from '../../models/task.model';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Modal } from 'bootstrap';
-// At the top of your component file, before the @Component decorator
 @Component({
   selector: 'app-task-list',
-  standalone: true, // Recommended for modern Angular
+  standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
@@ -84,7 +83,6 @@ export class TaskListComponent implements OnInit {
       tags: task.tags.join(', ')
     });
 
-    // Use Bootstrap's Modal constructor directly
     this.bootstrapModal = new Modal(this.editTaskModal.nativeElement);
     this.bootstrapModal.show();
   }
@@ -118,9 +116,8 @@ export class TaskListComponent implements OnInit {
     if (confirmation) {
       this.taskService.deleteTask(id).subscribe({
         next: () => {
-          // Show confirmation message to the user
           alert('Task has been deleted successfully!');
-          this.loadTasks();  // Reload tasks after deletion
+          this.loadTasks();
         },
         error: (error: any) => console.error('Error deleting task:', error)
       });

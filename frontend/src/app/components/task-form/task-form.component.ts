@@ -14,9 +14,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class TaskFormComponent implements OnInit {
   taskForm: FormGroup;
-  @Input() taskId: string | null = null; // For editing an existing task
+  @Input() taskId: string | null = null;
   taskToEdit: Task | null = null;
-  existingTags: Set<string> = new Set(); // To enforce unique tags
+  existingTags: Set<string> = new Set();
   successMessage: string | null = null;
 
   constructor(
@@ -99,10 +99,10 @@ export class TaskFormComponent implements OnInit {
     this.taskService.createTask(taskData).subscribe({
       next: () => {
         this.successMessage = 'Task created successfully!';
-        setTimeout(() => (this.successMessage = null), 3000); // Hide the message after 3 seconds
-        this.taskForm.reset(); // Reset the form
-        this.existingTags.clear(); // Clear the tags set
-        this.taskForm.patchValue({ tags: '' }); // Clear the tags field in the form
+        setTimeout(() => (this.successMessage = null), 3000);
+        this.taskForm.reset();
+        this.existingTags.clear();
+        this.taskForm.patchValue({ tags: '' });
       },
       error: (err) => {
         console.error('Error creating task:', err);
